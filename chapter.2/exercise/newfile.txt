@@ -1,0 +1,4 @@
+#written by FileProperties
+width=1024
+height=1000
+depth=32
