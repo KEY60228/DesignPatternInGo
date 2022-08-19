@@ -6,14 +6,21 @@ import (
 )
 
 type IDCardFactory struct {
+	id      int64
+	mapping map[int64]string
 }
 
 func NewIDCardFactory() *IDCardFactory {
-	return &IDCardFactory{}
+	return &IDCardFactory{
+		id:      0,
+		mapping: make(map[int64]string),
+	}
 }
 
 func (idf *IDCardFactory) CreateProduct(owner string) framework.Product {
-	return NewIDCard(owner)
+	idf.id++
+	idf.mapping[idf.id] = owner
+	return NewIDCard(idf.id, owner)
 }
 
 func (idf *IDCardFactory) RegisterProduct(product framework.Product) {
