@@ -1,8 +1,9 @@
 package idcard
 
 import (
-	"DesignPatternInGo/chapter.4/framework"
 	"fmt"
+
+	"DesignPatternInGo/FactoryMethod/framework"
 )
 
 type IDCardFactory struct {

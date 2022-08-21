@@ -1,8 +1,8 @@
 package main
 
 import (
-	"DesignPatternInGo/chapter.4/framework"
-	"DesignPatternInGo/chapter.4/idcard"
+	"DesignPatternInGo/FactoryMethod/framework"
+	"DesignPatternInGo/FactoryMethod/idcard"
 )
 
 func main() {
