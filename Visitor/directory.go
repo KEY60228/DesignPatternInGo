@@ -19,11 +19,11 @@ func (d *Directory) GetName() string {
 }
 
 func (d *Directory) GetSize() int {
-	var size int
+	v := NewSizeVisitor()
 	for _, e := range d.dir {
-		size += e.GetSize()
+		e.Accept(v)
 	}
-	return size
+	return v.totalSize
 }
 
 func (d *Directory) Add(e Entry) {

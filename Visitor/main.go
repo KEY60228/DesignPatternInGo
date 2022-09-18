@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+	fmt.Println("Making root entries...")
+
 	rootDir := NewDirectory("root")
 	binDir := NewDirectory("bin")
 	tmpDir := NewDirectory("tmp")
@@ -13,6 +15,10 @@ func main() {
 	rootDir.Add(usrDir)
 	binDir.Add(NewFile("vi", 10000))
 	binDir.Add(NewFile("latex", 20000))
+	rootDir.Accept(NewListVisitor())
+
+	fmt.Println()
+	fmt.Println("Making user entries...")
 
 	yuki := NewDirectory("yuki")
 	hanako := NewDirectory("hanako")
@@ -24,15 +30,9 @@ func main() {
 	yuki.Add(NewFile("diary.html", 100))
 	yuki.Add(NewFile("Composite.go", 200))
 	hanako.Add(NewFile("memo.tex", 300))
-	hanako.Add(NewFile("index.html", 350))
 	tomura.Add(NewFile("game.doc", 400))
 	tomura.Add(NewFile("junk.mail", 500))
+	rootDir.Accept(NewListVisitor())
 
-	ffv := NewFileFindVisitor(".html")
-	rootDir.Accept(ffv)
-
-	fmt.Println("HTML files are: ")
-	for _, f := range ffv.GetFoundFiles() {
-		fmt.Println(f.ToString(f))
-	}
+	fmt.Println()
 }
