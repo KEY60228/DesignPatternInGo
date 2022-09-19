@@ -4,6 +4,7 @@ import "fmt"
 
 type Support interface {
 	SetNext(Support) Support
+	GetNext() Support
 	Do(Support, *Trouble)
 	Resolve(*Trouble) bool
 	Done(Support, *Trouble)
@@ -28,13 +29,22 @@ func (s *AbstractSupport) SetNext(next Support) Support {
 	return next
 }
 
+func (s *AbstractSupport) GetNext() Support {
+	return s.next
+}
+
 func (s *AbstractSupport) Do(support Support, trouble *Trouble) {
-	if support.Resolve(trouble) {
-		s.Done(support, trouble)
-	} else if s.next != nil {
-		s.next.Do(s.next, trouble)
-	} else {
-		s.Fail(trouble)
+	next := support
+	for {
+		if next.Resolve(trouble) {
+			s.Done(next, trouble)
+			break
+		}
+		next = next.GetNext()
+		if next == nil {
+			s.Fail(trouble)
+			break
+		}
 	}
 }
 
