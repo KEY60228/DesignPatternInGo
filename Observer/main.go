@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	generator := NewRandomNumberGenerator(0)
+	generator := NewIncrementalNumberGenerator(10, 50, 5)
 	observer1 := NewDigitObserver()
 	observer2 := NewGraphObserver()
 	generator.AddObserver(observer1)
