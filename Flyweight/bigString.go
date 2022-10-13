@@ -4,11 +4,16 @@ type BigString struct {
 	bigChars []*BigChar
 }
 
-func NewBigString(factory *BigCharFactory, str string) *BigString {
+func NewBigString(factory *BigCharFactory, str string, shared bool) *BigString {
 	f := factory.GetInstance()
 	bigChars := make([]*BigChar, len(str))
 	for i := 0; i < len(bigChars); i++ {
-		bigChars[i] = f.GetBigChar(str[i : i+1])
+		if shared {
+			bigChars[i] = f.GetBigChar(str[i : i+1])
+		} else {
+			bigChars[i] = NewBigChar(str[i : i+1])
+		}
+
 	}
 	return &BigString{bigChars: bigChars}
 }

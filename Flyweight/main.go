@@ -14,6 +14,6 @@ func main() {
 	}
 	factory := NewBigCharFactory()
 
-	bs := NewBigString(factory, str)
+	bs := NewBigString(factory, str, true)
 	bs.Print()
 }
