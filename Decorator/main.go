@@ -17,4 +17,16 @@ func main() {
 	b4 := NewFullBorder(NewUpDownBorder(NewSideBorder(NewUpDownBorder(NewSideBorder(NewStringDisplay("Hello, World"), "*"), "="), "|"), "/"))
 	b4.Show(b4)
 	fmt.Println()
+
+	b5 := NewMultiStringDisplay()
+	b5.Add("Hi!")
+	b5.Add("Good morning.")
+	b5.Add("Good night!")
+	b5.Show(b5)
+
+	b6 := NewSideBorder(b5, "#")
+	b6.Show(b6)
+
+	b7 := NewFullBorder(b5)
+	b7.Show(b7)
 }
